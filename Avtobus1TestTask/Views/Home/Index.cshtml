@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model IEnumerable<Avtobus1TestTask.Models.URL_Statistics>;
+
+}
+
+
+<p>
+    <a class="btn btn-sm btn-danger" asp-action="Create">Create short URL</a>
+</p>
+<table class="table table-striped" border="1">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.LongURL)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ShortURL)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NumberTransitions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Message == null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="d-inline-block text-truncate" style="max-width: 350px;">
+                            <a href="@Html.DisplayFor(modelItem => item.LongURL)">
+                                @Html.DisplayFor(modelItem => item.LongURL)
+                            </a>
+                        </span>
+
+                    </td>
+                    <td>
+                        <a href="@Html.DisplayFor(modelItem => item.ShortURL)">@ViewContext.HttpContext.Request.Scheme://@Context.Request.Host/@Html.DisplayFor(modelItem => item.ShortURL)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberTransitions)
+                    </td>
+                    <td>
+                        
+                        <form asp-action="Delete" asp-route-id="@item.Id">
+                            <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this record?')" type="submit">Delete</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (ViewBag.Message != null)
+{
+    <p class="text-center">@ViewBag.Message</p>
+}

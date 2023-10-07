@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Create short URL";
+}
+@model Avtobus1TestTask.Models.URL_Statistics;
+
+
+<form asp-action="Create" asp-controller="Home" method="post">
+    <div class="mb-3">
+        <label asp-for="LongURL" class="form-label">Long URL</label>
+        <input asp-for="LongURL" type="url" class="form-control" id="LongURL" aria-describedby="URLlHelp">
+        <span asp-validation-for="LongURL" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br />
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+
